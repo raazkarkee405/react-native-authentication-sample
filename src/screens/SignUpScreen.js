@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { CustomInput } from "../components/CustomInput";
 import { CustomButton } from "../components/CustomButton";
 import { SocialSignInButtons } from "../components/SocialSignInButtons";
+import { useNavigation } from "@react-navigation/native";
 
 const SignUpScreen = () => {
   const [username, setUsername] = useState("");
@@ -11,8 +12,9 @@ const SignUpScreen = () => {
 
   const [passwordRepeat, setPasswordRepeat] = useState("");
 
+  const navigation = useNavigation();
   const onRegisterPressed = () => {
-    console.warn("Sign In Pressed");
+    navigation.navigate("ConfirmEmail");
   };
 
   const onTermsOfUsePressed = () => {
@@ -21,7 +23,9 @@ const SignUpScreen = () => {
 
   const onPrivacyPolicyPressed = () => {};
 
-  const onSignInPressed = () => {};
+  const onSignInPressed = () => {
+    navigation.navigate("SignIn");
+  };
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>

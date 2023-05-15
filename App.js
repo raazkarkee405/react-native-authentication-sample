@@ -1,17 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
-import {
-  ConfirmEmailScreen,
-  ForgotPasswordScreen,
-  SignInScreen,
-  SignUpScreen,
-  NewForgotPasswordScreen,
-} from "./src/screens";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Navigation from "./src/navigation";
 
 const App = () => {
   return (
     <SafeAreaView style={styles.root}>
-      <NewForgotPasswordScreen />
+      <Navigation />
     </SafeAreaView>
   );
 };
