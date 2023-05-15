@@ -43,6 +43,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#3B71F3",
   },
 
+  container_SECONDARY: {
+    borderColor: "#3B71F3",
+    borderWidth: 2,
+  },
+
   container_TERTIARY: {},
   text: {
     fontWeight: "bold",
@@ -51,6 +56,9 @@ const styles = StyleSheet.create({
   text_TERTIARY: {
     color: "grey",
   },
+  text_SECONDARY: {
+    color:  '#3B71F3'
+  }
 });
 
 export default CustomButton;

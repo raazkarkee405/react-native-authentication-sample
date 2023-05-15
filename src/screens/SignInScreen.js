@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   useWindowDimensions,
@@ -8,7 +7,9 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { FlagNepal } from "../../assets";
-import { CustomButton, CustomInput } from "../components";
+import { CustomInput } from "../components/CustomInput";
+import { CustomButton } from "../components/CustomButton";
+import { SocialSignInButtons } from "../components/SocialSignInButtons";
 
 const SignInScreen = () => {
   const { height } = useWindowDimensions();
@@ -23,9 +24,6 @@ const SignInScreen = () => {
     console.warn("Forgot Pressed");
   };
 
-  const onSignInFacebook = () => {};
-  const onSignInGoogle = () => {};
-  const onSignInApple = () => {};
   const onSignUpPressed = () => {};
 
   return (
@@ -53,24 +51,7 @@ const SignInScreen = () => {
           onPress={onForgotPasswordPressed}
           type="TERTIARY"
         />
-        <CustomButton
-          text="Sign In with Facebook"
-          onPress={onSignInFacebook}
-          bgColor="#E7EAF4"
-          fgColor="#4765A9"
-        />
-        <CustomButton
-          text="Sign In with Google"
-          onPress={onSignInGoogle}
-          bgColor="#FAE9EA"
-          fgColor="#DD4D44"
-        />
-        <CustomButton
-          text="Sign In with Apple"
-          onPress={onSignInApple}
-          bgColor="#e3e3e3"
-          fgColor="#363636"
-        />
+        <SocialSignInButtons />
 
         <CustomButton
           text="Don't have an account? Create one"
