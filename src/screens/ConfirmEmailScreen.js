@@ -2,11 +2,10 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { CustomInput } from "../components/CustomInput";
 import { CustomButton } from "../components/CustomButton";
-import { SocialSignInButtons } from "../components/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
-
+import { useForm } from "react-hook-form";
 const ConfirmEmailScreen = () => {
-  const [code, setCode] = useState("");
+  const { control, handleSubmit } = useForm();
 
   const navigation = useNavigation();
 
@@ -24,12 +23,15 @@ const ConfirmEmailScreen = () => {
       <View style={styles.root}>
         <Text style={styles.title}>Confirm Your Email</Text>
         <CustomInput
-          placeholder="Confirmation Code"
-          value={code}
-          setValue={setCode}
+          name="code"
+          control={control}
+          placeholder="Enter your confirmation code"
+          rules={{
+            required: "Confirmation code is required",
+          }}
         />
 
-        <CustomButton text="Confirm" onPress={onConfirmPressed} />
+        <CustomButton text="Confirm" onPress={handleSubmit(onConfirmPressed)} />
         <CustomButton
           text="Resend Code"
           onPress={onResendPressed}

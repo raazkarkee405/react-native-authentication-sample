@@ -4,13 +4,17 @@ import { CustomInput } from "../components/CustomInput";
 import { CustomButton } from "../components/CustomButton";
 import { SocialSignInButtons } from "../components/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
+import { useForm } from "react-hook-form";
 
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const SignUpScreen = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [passwordRepeat, setPasswordRepeat] = useState("");
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
 
   const navigation = useNavigation();
   const onRegisterPressed = () => {
@@ -32,24 +36,48 @@ const SignUpScreen = () => {
       <View style={styles.root}>
         <Text style={styles.title}>Create an account</Text>
         <CustomInput
+          name="username"
           placeholder="Username"
-          value={username}
-          setValue={setUsername}
+          control={control}
+          rules={{
+            required: "Username is required",
+            minLength: { value: 3, message: "Username is too short" },
+            maxLength: { value: 20, message: "Username is too long" },
+          }}
         />
-        <CustomInput placeholder="Email" value={email} setValue={setEmail} />
         <CustomInput
+          name="email"
+          control={control}
+          rules={{
+            required: "Email is required",
+            pattern: { value: EMAIL_REGEX, message: "Email is invalid" },
+          }}
+          placeholder="Email"
+        />
+        <CustomInput
+          name="password"
           placeholder="Password"
-          value={password}
-          setValue={setPassword}
+          control={control}
           secureTextEntry
+          rules={{
+            required: "Password is required",
+            minLength: { value: 8, message: "Password is too short" },
+          }}
         />
         <CustomInput
+          name="password-repeat"
           placeholder="Repeat Password"
-          value={passwordRepeat}
-          setValue={setPasswordRepeat}
+          control={control}
           secureTextEntry
+          rules={{
+            validate: (value) =>
+              value === watch("password") || "Passwords do not match",
+          }}
         />
-        <CustomButton text="Register" onPress={onRegisterPressed} />
+        <CustomButton
+          text="Register"
+          onPress={handleSubmit(onRegisterPressed)}
+        />
 
         <Text style={styles.text}>
           By registering, you confirm that you accept our{" "}
